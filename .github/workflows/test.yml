@@ -21,7 +21,7 @@ jobs:
           rm -rf /var/lib/apt/lists/*
           gem install bundler && bundle install -j $(nproc) --path vendor
       - name: Cache Gradle packages
-      - uses: actions/cache@v2
+        uses: actions/cache@v2
         with:
           key: moneyfreek-pretest
           path: |
