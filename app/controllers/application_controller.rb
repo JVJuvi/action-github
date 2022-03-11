@@ -4,4 +4,7 @@ class ApplicationController < ActionController::Base
 
     def halo
     end
+
+    def hola
+    end
 end
