@@ -1,8 +1,8 @@
 name: Test rubocop and brakeman
-on: [ pull_request ]
-#   pull_request:
-#    branches:
-#      - test 
+on:
+  pull_request:
+   branches:
+     - test 
 jobs:
   test_rubocop:
     runs-on: ubuntu-latest
