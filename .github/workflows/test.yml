@@ -20,7 +20,7 @@ jobs:
           apt-get clean && 
           rm -rf /var/lib/apt/lists/*
           gem install bundler && bundle install -j $(nproc) --path vendor
-      - name: rubocop
+      - name: Rubocop
         run: bundle exec rubocop
       
   test_brakeman:
@@ -38,7 +38,5 @@ jobs:
           apt-get clean && 
           rm -rf /var/lib/apt/lists/*
           gem install bundler && bundle install -j $(nproc) --path vendor
-      - name: Brakeman action
-        uses: artplan1/brakeman-action@v1.2.1
-        with:
-          flags: "--color"
+      - name: Brakeman
+        run: bundle exec brakeman --color
