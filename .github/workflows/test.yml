@@ -1,0 +1,39 @@
+name: Test rubocop and brakeman
+on: 
+  push: 
+jobs:
+  test_rubocop:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7.2 # Not needed with a .ruby-version file
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+#       - name: Install dependencies
+#         run: bundle install
+      - name: Run tests
+        run: bundle exec rake
+      - name: Run rubocop
+        run: bundle exec rubocop
+      
+  test_brakeman:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7.2
+          bundler-cache: true 
+      - name: Test
+        run: |
+          mkdir .apt && mkdir /var/cache/apt/archives && mount --bind .apt /var/cache/apt/archives/
+          apt-get update -qq &&
+          apt-get install -y apt-utils build-essential nodejs default-libmysqlclient-dev && 
+          apt-get clean && 
+          rm -rf /var/lib/apt/lists/*
+          gem install bundler && bundle install -j $(nproc) --path vendor
+      - name: Brakeman action
+        uses: artplan1/brakeman-action@v1.2.1
+        with:
+          flags: "--color"
