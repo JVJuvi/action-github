@@ -4,4 +4,7 @@ class ApplicationController < ActionController::Base
 
     def hi
     end
+
+    def anho
+    end
 end
