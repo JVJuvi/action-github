@@ -12,7 +12,7 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.0.3 # Not needed with a .ruby-version file
-          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+#           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
 #       - name: Install dependencies
 #         run: bundle install
       - name: Pre test
@@ -39,7 +39,7 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.0.3
-          bundler-cache: true 
+#           bundler-cache: true 
       - name: Pre test
         run: |
           mkdir .apt && mkdir /var/cache/apt/archives && mount --bind .apt /var/cache/apt/archives/
