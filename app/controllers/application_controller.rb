@@ -7,4 +7,7 @@ class ApplicationController < ActionController::Base
 
     def anho
     end
+
+    def banchb
+    end
 end
