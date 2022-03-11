@@ -1,5 +1,6 @@
 name: Test rubocop and brakeman
 on:
+  push:
   pull_request:
    branches:
      - test 
@@ -23,11 +24,13 @@ jobs:
           rm -rf /var/lib/apt/lists/*
           gem install bundler && bundle install -j $(nproc) --path vendor
       - name: rubocop
-        uses: reviewdog/action-rubocop@v2
-        with:
-          rubocop_version: gemfile
-          rubocop_extensions: rubocop-rails:gemfile rubocop-rspec:gemfile
-          reporter: github-pr-review # Default is github-pr-check
+        run: bundle exec rubocop
+#       - name: rubocop
+#         uses: reviewdog/action-rubocop@v2
+#         with:
+#           rubocop_version: gemfile
+#           rubocop_extensions: rubocop-rails:gemfile rubocop-rspec:gemfile
+#           reporter: github-pr-review # Default is github-pr-check
       
   test_brakeman:
     runs-on: ubuntu-latest
